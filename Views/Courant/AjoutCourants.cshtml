@@ -1,0 +1,67 @@
+﻿@model ASP.NET_MVC.Models.COURANT
+
+@{
+    ViewBag.Title = "Ajouter Courant";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ajouter Courant</h2>
+
+<div>
+
+    <form id="formCourant" name="formCourant" action="" method="post">
+        @if (Model != null)
+        {
+            <input type="hidden" name="ID_COURANT" id="ID_COURANT" value="@Model.ID_COURANT" />
+        }
+        <div class="form-group">
+            <label>Genre</label>
+            <select id="ID_GENRE" name="ID_GENRE" class="form-control">
+                @foreach (var data in ViewBag.listeGenre)
+                {
+                    <option value="@data.ID_GENRE" @(Model != null ? Model.ID_GENRE == @data.ID_GENRE ? "selected" : "" : "" )>@data.LIBELLE_GENRE</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>COURANTS</label>
+            <input type="text" id="LIBELLE_COURANT" name="LIBELLE_COURANT" class="form-control" value="@(Model!=null? Model.LIBELLE_COURANT:"")" required />
+
+        </div>
+        <div>
+            @if (Model == null)
+            {
+                <input type="submit" id="enregistrer" name="enregistrer" value="Enregistrer" class="btn btn-success" />
+            }
+            else
+            {
+                <input type="submit" id="modifier" name="modifier" value="Enregistrer Modification" class="btn btn-success" />
+                <a href="~/Courant/AjoutCourant" class="btn btn-default">Annuler</a>
+            }
+        </div>
+    </form>
+
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>LIBELLE_COURAN</th>
+                <th>GENRES.</th>
+                <th>Modifier</th>
+                <th> Supprimer</th>
+            </tr>
+            @foreach (var data in ViewBag.listeCourant)
+            {
+                <tr>
+                    <td>@data.LIBELLE_COURANT</td>
+                    <td>@data.GENRE.LIBELLE_GENRE</td>
+                    <td><a href="~/Courant/ModifierCourant/@data.ID_COURANT" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Modifier</a></td>
+                    <td><a href="~/Courant/SupprimerCourant/@data.ID_COURANT" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Supprimer</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,54 @@
+﻿@model ASP.NET_MVC.Models.AUTEUR
+
+@{
+    ViewBag.Title = "Ajouter un auteur";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ajouter un auteur</h2>
+
+<div>
+
+    <form id="formAuteur" name="formAuteur" action="" method="post">
+        @if (Model != null)
+        {
+            <input type="hidden" name="ID_AUTEUR" id="ID_AUTEUR" value="@Model.ID_AUTEUR" />
+        }
+        <div class="form-group">
+            <label>Auteur</label>
+            <input type="text" id="NOM_AUTEUR" name="NOM_AUTEUR" class="form-control" value="@(Model!=null? Model.NOM_AUTEUR:"")" required />
+        </div>
+        <div>
+            @if (Model == null)
+            {
+                <input type="submit" id="enregistrer" name="enregistrer" value="Enregistrer" class="btn btn-success" />
+            }
+            else
+            {
+                <input type="submit" id="modifier" name="modifier" value="Enregistrer Modification" class="btn btn-success" />
+                <a href="~/Auteur/AjoutAuteur" class="btn btn-default">Annuler</a>
+            }
+        </div>
+    </form>
+
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>Auteur</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
+            </tr>
+            @foreach (var data in ViewBag.listeAuteur)
+            {
+                <tr>
+                    <td>@data.NOM_AUTEUR</td>
+                    <td><a href="~/Auteur/ModifierAuteur/@data.ID_AUTEUR" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Modifier</a></td>
+                    <td><a href="~/Auteur/SupprimerAuteur/@data.ID_AUTEUR" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Supprimer</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+
+</div>

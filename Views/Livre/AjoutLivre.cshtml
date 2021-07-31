@@ -1,0 +1,119 @@
+﻿@model ASP.NET_MVC.Models.LIVRE
+
+@{
+    ViewBag.Title = "Ajouter Livre";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ajouter Livre</h2>
+
+
+
+<div>
+
+    <form id="formLivre" name="formLivre" action="" method="post" enctype="multipart/form-data">
+        <div class="row">
+            @if (Model != null)
+            {
+                <input type="hidden" name="ID_LIVRE" id="ID_LIVRE" value="@Model.ID_LIVRE" />
+            }
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                <label>Auteur</label>
+                <select id="ID_AUTEUR" name="ID_AUTEUR" class="form-control">
+                    @foreach (var data in ViewBag.listeAuteur)
+                    {
+                        <option value="@data.ID_AUTEUR" @(Model != null ? Model.ID_AUTEUR == @data.ID_AUTEUR ? "selected" : "" : "" )>@data.NOM_AUTEUR</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Genre</label>
+                <select id="ID_GENRE" name="ID_GENRE" class="form-control">
+                    @foreach (var data in ViewBag.listeGenre)
+                    {
+                        <option value="@data.ID_GENRE" @(Model != null ? Model.ID_GENRE == @data.ID_GENRE ? "selected" : "" : "" )>@data.LIBELLE_GENRE</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Livre</label>
+                <input type="text" id="TITRE" name="TITRE" class="form-control" value="@(Model!=null? Model.TITRE : "")" required />
+            </div>
+
+            <div class="form-group">
+                <label>ISBN</label>
+                <input type="text" id="ISBN" name="ISBN" class="form-control" value="@(Model!=null? Model.ISBN : 0)" required />
+            </div>
+
+        </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                    <label>IMAGE Livre</label>
+                    <input type="file" id="IMAGE_LIVRE" name="IMAGE_LIVRE" class="form-control" value="@(Model!=null? Model.IMAGE_LIVRE : "")" />
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            @if (Model == null)
+            {
+                <input type="submit" id="enregistrer" name="enregistrer" value="Enregistrer" class="btn btn-success" />
+            }
+            else
+            {
+                <input type="submit" id="modifier" name="modifier" value="Enregistrer Modification" class="btn btn-success" />
+                <a href="~/Livre/AjoutLivre" class="btn btn-default">Annuler</a>
+            }
+        </div>
+    </form>
+
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table table-bordered" id="livres">
+            <thead>
+                <tr>
+                    <th>ISBN</th>
+                    <th>TITRE</th>
+                    <th>IMAGE</th>
+                    <th>Auteur</th>
+                    <th>Genre</th>
+                    <th>Lire</th>
+                    <th>Modifier</th>
+                    <th> Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var data in ViewBag.listeLivre)
+                {
+                    <tr>
+                        <td>@data.ISBN</td>
+                        <td>@data.TITRE</td>
+                        <td><img src="~/Fichier/livre.png" width="100" height="80" /></td>
+                        <td>@data.AUTEUR.NOM_AUTEUR</td>
+                        <td>@data.GENRE.LIBELLE_GENRE</td>
+                        <td>
+
+                            @Html.ActionLink("Lire", "RetrieveFile", new { id = data.ID_LIVRE }, new { @class = "btn btn-primary btn-sm fa fa-eye", @style = "color:white;background-color:#5bc0de;", @target = "_blank" })
+                        </td>
+                        <td><a href="~/Livre/ModifierLivre/@data.ID_LIVRE" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Modifier</a></td>
+                        <td><a href="~/Livre/SupprimerLivre/@data.ID_LIVRE" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Supprimer</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @section scripts
+        {
+            <script>
+
+                $(document).ready(function () { $("#livres").DataTable() })
+
+            </script>
+        </div>
+        }
+    </div>
