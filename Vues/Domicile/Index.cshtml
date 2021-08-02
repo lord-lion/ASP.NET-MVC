@@ -1,0 +1,21 @@
+@{
+    ViewBag.Title = "ESGIS BIBLIOTHEQUE";
+}
+
+<div class="text-center">
+    @if (ViewData["closeMessage"] == null)
+    {
+        <h1 class="display-4">ESGIS BIBLIOTHEQUE</h1>
+        <p>Bienvenue dans la bibliothèque numérique de ESGIS. ESGIS pour vous servir.</p>
+    }
+    else
+    {
+        <h1 class="display-4">Biblilothèque en maintenance</h1>
+        <p>@ViewData["closeMessage"].ToString()</p>
+    }
+    @if (ViewData["warningMessage"] != null)
+    {
+        <h1 class="display-4 text-red">Warning</h1>
+        <p>@ViewData["warningMessage"].ToString()</p>
+    }
+</div>
