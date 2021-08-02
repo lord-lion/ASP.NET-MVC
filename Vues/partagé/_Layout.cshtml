@@ -1,10 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mon application ASP.NET</title>
+    <title>@ViewBag.Title - ESGIS Bibliotheque ASP.NET</title>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -22,10 +23,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+
                     <li>@Html.ActionLink("Auteurs", "AjoutAuteur", "Auteur")</li>
                     <li>@Html.ActionLink("Livres", "AjoutLivre", "Livre")</li>
                     <li>@Html.ActionLink("Genres Litteraires", "AjoutGenre", "Genre")</li>
                     <li>@Html.ActionLink("Courants Litteraires", "AjoutCourants", "Courant")</li>
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -35,7 +38,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Mon application ASP.NET</p>
+            <p>&copy; @DateTime.Now.Year - ESGIS ASP.NET</p>
         </footer>
     </div>
 
