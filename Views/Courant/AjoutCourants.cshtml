@@ -1,4 +1,4 @@
-﻿@model ASP.NET_MVC.Models.COURANT
+@model ASP.NET_MVC.Models.COURANT
 
 @{
     ViewBag.Title = "Ajouter Courant";
@@ -45,23 +45,35 @@
     <hr />
 
     <div class="table-responsive">
-        <table class="table table-bordered">
-            <tr>
-                <th>LIBELLE_COURAN</th>
-                <th>GENRES.</th>
-                <th>Modifier</th>
-                <th> Supprimer</th>
-            </tr>
-            @foreach (var data in ViewBag.listeCourant)
-            {
+        <table class="table table-bordered" id="courants">
+            <thead>
                 <tr>
-                    <td>@data.LIBELLE_COURANT</td>
-                    <td>@data.GENRE.LIBELLE_GENRE</td>
-                    <td><a href="~/Courant/ModifierCourant/@data.ID_COURANT" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Modifier</a></td>
-                    <td><a href="~/Courant/SupprimerCourant/@data.ID_COURANT" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Supprimer</a></td>
+                    <th>LIBELLE_COURAN</th>
+                    <th>GENRES.</th>
+                    <th>Modifier</th>
+                    <th> Supprimer</th>
                 </tr>
-            }
-        </table>
-    </div>
+            </thead>
+            <tbody>
+                @foreach (var data in ViewBag.listeCourant)
+                {
+                    <tr>
+                        <td>@data.LIBELLE_COURANT</td>
+                        <td>@data.GENRE.LIBELLE_GENRE</td>
+                        <td><a href="~/Courant/ModifierCourant/@data.ID_COURANT" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Modifier</a></td>
+                        <td><a href="~/Courant/SupprimerCourant/@data.ID_COURANT" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Supprimer</a></td>
+                    </tr>
+                }
+            </tbody>
 
-</div>
+        </table>
+        @section scripts
+        {
+            <script>
+
+                $(document).ready(function () { $("#courants").DataTable() })
+
+            </script>
+        </div>
+        }
+    </div>
