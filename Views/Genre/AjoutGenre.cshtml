@@ -1,4 +1,4 @@
-﻿@model ASP.NET_MVC.Models.GENRE
+@model ASP.NET_MVC.Models.GENRE
 
 @{
     ViewBag.Title = "Ajouter Genre";
@@ -34,21 +34,33 @@
     <hr />
 
     <div class="table-responsive">
-        <table class="table table-bordered">
-            <tr>
-                <th>Genre</th>
-                <th>Modifier</th>
-                <th> Supprimer</th>
-            </tr>
-            @foreach (var data in ViewBag.listeGenre)
-            {
+        <table class="table table-bordered" id="genres">
+            <thead>
                 <tr>
-                    <td>@data.LIBELLE_GENRE</td>
-                    <td><a href="~/Genre/ModifierGenre/@data.ID_GENRE" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Modifier</a></td>
-                    <td><a href="~/Genre/SupprimerGenre/@data.ID_GENRE" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Supprimer</a></td>
+                    <th>Genre</th>
+                    <th>Modifier</th>
+                    <th> Supprimer</th>
                 </tr>
-            }
-        </table>
-    </div>
+            </thead>
+            <tbody>
+                @foreach (var data in ViewBag.listeGenre)
+                {
+                    <tr>
+                        <td>@data.LIBELLE_GENRE</td>
+                        <td><a href="~/Genre/ModifierGenre/@data.ID_GENRE" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Modifier</a></td>
+                        <td><a href="~/Genre/SupprimerGenre/@data.ID_GENRE" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Supprimer</a></td>
+                    </tr>
+                }
+            </tbody>
 
-</div>
+        </table>
+        @section scripts
+        {
+            <script>
+
+                $(document).ready(function () { $("#genres").DataTable() })
+
+            </script>
+        </div>
+        }
+    </div>
